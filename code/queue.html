@@ -6,6 +6,51 @@
     <body>
         <script>
            
+           function PriorityqQueue(){
+               var items=[]
+               function QueueElement(ele,priority){
+                   this.ele = ele;
+                   this.priority = priority;
+
+               };
+               this.enqueue = function(ele,priority){
+                    qe =new QueueElement(ele,priority);
+                    if(this.isEmpty()){
+                        items.push(qe);
+                    }else{
+                        var added = false;
+                        for(var i = 0;i<items.length;i++){
+                            // 数字越大，优先级越高
+                            if(qe.priority > items[i].priority){
+                                items.splice(i,0,qe);
+                                added = true;
+                                break;
+                            }
+                        };
+
+                        if(!added){
+                            items.push(qe)
+                        }
+                        
+                    }
+               };
+               this.dequeue = function(){
+                    return items.shift();
+               };
+               this.isEmpty = function(){
+                   return items.length == 0;
+               }
+           };
+
+           pe = new PriorityqQueue()
+           pe.enqueue('a',1);
+           pe.enqueue('b',2);
+           pe.enqueue('c',3);
+           pe.enqueue('d',4);
+           alert(pe.dequeue().ele);
+           alert(pe.dequeue().ele);
+           alert(pe.dequeue().ele);
+           alert(pe.dequeue().ele);
         </script>
     </body>
 </html>
