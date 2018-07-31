@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>JavaScript数组基本操作</title>
+    </head>
+    <body>
+        <script>
+            // 创建数组
+            arr = [1,2,3,4,5];
+            arr2 = new Array(10);
+            arr3 = new Array("hello","world","javascript");
+            //遍历
+            for(var i=0;i<arr.length;i++){
+                //alert(arr[i]);
+            }
+
+            arr3.forEach(function(e) {
+                //alert(e);
+            });
+            /*
+            求菲波那切数列的前20个数字, 并且放在数组中.
+            菲波那切数列数列第一个数字是1, 第二个数字也是1, 第三项是前两项的和
+            */
+            f=[1,1]
+            for(var i=2;i<20;i++){
+                f[i]=f[i-1]+f[i-2];
+            }
+            alert(f)
+            //数组中常见的操作有: 添加元素、删除元素、修改元素、获取元素.
+            //添加元素
+            ele = arr.push(6)
+            alert("arr添加了元素："+ele+". 现在arr为："+arr);
+            //删除元素
+            ele = arr.pop(6)
+            alert("arr删除了元素："+ele+". 现在arr为："+arr);
+            //前面删除
+            ele = arr.shift()
+            alert("arr使用shift删除了前面元素："+ele+". 现在arr为："+arr);
+            //前面添加
+            ele = arr.unshift(1)
+            alert("arr使用unshift添加了前面元素："+ele+". 现在arr为："+arr);
+            //修改
+            ele = arr.splice(2,4,'a','b','c','d')
+            alert("arr使用splice修改元素："+ele+". 现在arr为："+arr);
+        </script>
+    </body>
+</html>
