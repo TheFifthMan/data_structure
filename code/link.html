@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>链表</title>
+    </head>
+    <body>
+        <script>
+            function LinkedList(){
+                function Node(element){
+                    this.element = element;
+                    this.next = null;
+                }
+                this.length = 0;
+                this.head = null;
+            }
+
+            LinkedList.prototype.append = function(element){
+                var newNode = new Node(element);
+                if(this.head == null){
+                    this.head = newNode;
+                }else{
+                    var current = this.head;
+                    while(current.next){
+                        current = current.next;
+                    }
+                    current.next = newNode;
+                }
+                this.length ++ ;
+            }
+            LinkedList.prototype.insert = function(position,element){
+                
+            }
+        </script>
+    </body>
+</html>
