@@ -5,31 +5,123 @@
     </head>
     <body>
         <script>
-            function LinkedList(){
-                function Node(element){
-                    this.element = element;
-                    this.next = null;
-                }
-                this.length = 0;
-                this.head = null;
-            }
+           function Linked () {
+               function Node (element) {
+                   this.element = element;
+                   this.next = null;
+               }
+               this.head = null;
+               this.length = 0;
 
-            LinkedList.prototype.append = function(element){
-                var newNode = new Node(element);
-                if(this.head == null){
-                    this.head = newNode;
-                }else{
-                    var current = this.head;
-                    while(current.next){
-                        current = current.next;
+                Linked.prototype.append = function(element){
+                    var newNode = new Node(element);
+                    if (this.head === null) {
+                        this.head = newNode;
+                    } else {
+                        var current = this.head
+                        // 如果下一个存在，就把当前节点指向下一个。
+                        // 如果不存在，跳出循环，这已经是最后一个
+                        while (current.next){
+                            current = current.next
+                        }
+                        // 最后一个添加地址，指向新的节点
+                        current.next = newNode;
                     }
-                    current.next = newNode;
+                    this.length ++ 
                 }
-                this.length ++ ;
-            }
-            LinkedList.prototype.insert = function(position,element){
-                
-            }
+                Linked.prototype.toString = function () {
+                    var current = this.head
+                    var listString = ''
+                    while (current){
+                        current = current.next;
+                        listString += ',' + current.element                    
+                    }
+                    return listString.slice(1)
+                }
+                Linked.prototype.insert = function (position,element) {
+                    if (position < 0 || position > this.length) return false;
+                    var newNode = new Node(element);
+                    var index = 0
+                    prev_node = null
+                    var current = this.head
+                    if(position === 0){
+                        newNode.next = current;
+                        this.head = newNode;
+                    }else{
+                        while (index < position) {
+                            prev_node = current;
+                            current = current.next;
+                            index ++;
+                        }
+                        newNode.next = current;
+                        prev_node.next = newNode;
+                        this.length ++;
+                    }
+                    return true;
+                }
+                //根据位置移除节点
+                Linked.prototype.remove = function(position){
+                    if (possition<0 || position > this.length) return false;
+                    var current = this.head;
+                    var prev_node = null;
+                    var index = 0;
+                    // 移除第一个
+                    if(position === 0){
+                        // 直接把地址给替换掉就好了
+                        this.head = current.next;
+                    }else {
+                        // 循环到当前节点
+                        while (index < position){
+                            prev_node = current;
+                            current = current.next;
+                            index ++;
+                        }
+                        //直接把前一个节点，替换为当前节点的下一个节点，那么当前节点地址就脱离节点了。
+                        prev_node.next = current.next;
+                       
+                    }
+                     this.length --;
+                     return current.element;
+                }
+                Linked.prototype.indexOf = function (element) {
+                    var current = this.head;
+                    var index = 0
+                    while (index < this.length ) {
+                        if (current.element === element ){
+                            return index;
+                        }
+                        current = current.next;
+                        index ++;
+                    }
+                    return -1;
+
+                }
+                Linked.prototype.removeElement = function (element) {
+                    var index = this.indexOf(element);
+                    return this.remove(index);
+                }
+                Linked.prototype.is_empty = function(){
+                    return this.length === 0;
+                }
+                Linked.prototype.size = function(){
+                    return this.length;
+                }
+                Linked.prototype.firstNode = function(){
+                    return this.head.element;
+                }
+           }
+           
+
+            var lk = new Linked()
+            lk.append(1)
+            lk.append(2)
+            lk.append(3)
+            lk.append(4)
+            lk.append(5)
+            lk.append(6)
+            lk.append(7)
+            lk.append(8)
+            alert(lk)
         </script>
     </body>
 </html>
