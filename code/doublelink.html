@@ -3,9 +3,86 @@
     <title>双向链表</title>
   </head>
   <body>
-
     <script>
-      
+      function DoubleLinkNode(){
+        function Node(element){
+          this.element = element;
+          this.next = null;
+          this.prev = null;
+        }
+        this.length = 0;
+        this.head = null;
+        this.tail = null;
+        // 在链表的最后面加元素
+        DoubleLinkNode.prototype.append = function(element){
+          var newNode = new Node(element);
+          if(this.head == null){
+            this.head = newNode;
+            this.tail = newNode;
+          }else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+          }
+          this.length ++ ;
+        }
+        //正向遍历
+        DoubleLinkNode.prototype.forwardSting = function(){
+          var current = this.head;
+          var str = '';
+          while(current){
+            current = current.next;
+            str += ','+current.element;
+          }
+          return str.slice(1);
+        }
+        //反向遍历
+        DoubleLinkNode.prototype.backwardString = function(){
+          var current = this.tail;
+          var str = '';
+          while(current){
+            current = current.prev;
+            str += ','+current.element;
+          }
+          return str.slice(1);
+        }
+        // 任意位置插入
+        DoubleLinkNode.prototype.insert = function(position,element){
+          var newNode = new Node(element);
+          if(position<0||position>this.length)return false;
+          var newNode = new Node(element);
+          
+          var current = this.head;
+          if(position === 0){
+            if(this.head === null){
+              this.head = newNode;
+              this.tail = newNode;
+            }else{
+              this.head.prev = newNode;
+              newNode.next = this.head;
+              this.head = newNode;
+            }
+          }else if(position === this.length){
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+          }else{
+            var index = 0;
+            while(index < position){
+              prev = current;
+              current = current.next;
+              index++;
+            }
+            current.prev = newNode;
+            prev.next = newNode;
+            newNode.next = current;
+            newNode.prv = prev;
+          }
+          this.length ++;
+          return true;
+        }
+        //
+      }
     </script>
   </body>
 </html>

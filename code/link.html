@@ -33,8 +33,8 @@
                     var current = this.head
                     var listString = ''
                     while (current){
-                        current = current.next;
-                        listString += ',' + current.element                    
+                        listString += ',' + current.element
+                        current = current.next;             
                     }
                     return listString.slice(1)
                 }
