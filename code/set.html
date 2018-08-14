@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>集合</title>
+  </head>
+  <body>
+    <script>
+      function Set(){
+        this.items = {}
+        Set.prototype.has = function(element){
+          return this.items.hasOwnProperty(element);
+        }
+        Set.prototype.add = function(element){
+          if(this.has(element))return false;
+          this.items[element] = element;
+          return true;
+        }
+        Set.prototype.remove = function(elem){
+          if(!this.has(elem))return false;
+          delete this.items[elem];
+          return true;
+        }
+        Set.prototype.clear = function(){
+          this.items = {};
+        }
+        Set.prototype.size = function(){
+          return Object.keys(this.items).length;
+        }
+        Set.prototype.value = function(){
+          return Object.keys(this.items);
+        }
+      }
+      var s = new Set();
+      s.add(1);
+      s.add(2);
+      s.add(3);
+      s.add(1);
+      alert(s.value());
+    </script> 
+  </body>
+</html>

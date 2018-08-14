@@ -31,8 +31,9 @@
           var current = this.head;
           var str = '';
           while(current){
+            str += ','+current.element;                        
             current = current.next;
-            str += ','+current.element;
+            
           }
           return str.slice(1);
         }
@@ -41,8 +42,8 @@
           var current = this.tail;
           var str = '';
           while(current){
+            str += ','+current.element;            
             current = current.prev;
-            str += ','+current.element;
           }
           return str.slice(1);
         }
@@ -81,8 +82,83 @@
           this.length ++;
           return true;
         }
-        //
+        //根据位置移除节点
+        DoubleLinkNode.prototype.removeAt = function(position){
+          if(position < 0 || position >= this.length) return false;
+          var current = this.head;
+          if (position === 0) {
+            if (this.length === 1) {
+              this.head = null;
+              this.tail = null;
+            }else {
+              this.head = current.next;
+              this.head.prev = null;
+            }
+          }else if (position === this.length - 1) {
+            current = this.tail;
+            this.tail = current.prev;
+            this.tail.next = null;
+          }else{
+            var index = 0;
+            while (index < position){
+              prev = current;
+              current = current.next;
+              index++;
+            }
+            prev.next = current.next;
+            current.next.prev = prev;
+          }
+          this.length --;
+        }
+        // 根据元素，得出位置
+        DoubleLinkNode.prototype.indexOf = function(element){
+          current = this.head;
+          var index = 0;
+          while(current){
+            if(element === current.element){
+              return index;
+            }
+            current = current.next
+            index ++ ;
+          }
+          return -1;
+        }
+        // 根据元素位置移除
+        DoubleLinkNode.prototype.remove = function(element) {
+          var index = this.indexOf(element)
+          return this.removeAt(index);
+        }
+        //判断是否是空
+        DoubleLinkNode.prototype.empty = function(){
+          return this.length === 0;
+        }
+        // 获取第一个元素
+        DoubleLinkNode.prototype.firstNode = function(){
+          return this.head.element;
+        }
+        // 获取最后一个元素
+        DoubleLinkNode.prototype.lastNode = function(){
+          return this.tail.element;
+        }
       }
+      var d = new DoubleLinkNode();
+      d.append(1);
+      d.append(2);
+      d.append(3);
+      d.append(4);
+      d.append(5);
+      d.append('a')
+      //alert(d.forwardSting());
+      //alert(d.backwardString());
+      d.removeAt(0);
+      //alert(d.forwardSting());
+      alert(d.length)
+      d.removeAt(3);
+      alert(d.length)
+      alert(d.backwardString());
+      alert(d.forwardSting())
+      alert('a的前置位置在'+d.indexOf('a'))
+      
     </script>
   </body>
 </html>
