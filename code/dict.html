@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>字典</title>
+  </head>
+  <body>
+    <script>
+      function Dict(){
+        this.items = {}
+        Dict.prototype.has = function(value){
+          return this.items.hasOwnProperty(value);
+        }
+        Dict.prototype.set = function(value){
+          if (this.has(value))return false;
+          this.items[value] = value;
+          return true;
+        }
+        Dict.prototype.remove = function(value) {
+          if (!this.has(value))return false;
+          delete this.items[value];
+          return true;
+        }
+        Dict.prototype.clear = function () {
+          this.items = {};
+        }
+        Dict.prototype.size = function(){
+          return Object.keys(this.items).length;
+        }
+        Dict.prototype.value = function(){
+          return Object.keys(this.items)
+        }
+      }
+    </script>
+  </body>
+</html>
